@@ -9,7 +9,11 @@ const server = http.createServer(app)
 
 const io = new Server(server , {
     cors : {
-        origin: "http://localhost:5173",
+        origin: (origin, callback) => {
+            // You can implement your logic here to allow or deny specific origins.
+            // For example, you could allow any origin in development but restrict in production.
+            callback(null, origin);
+        },
         methods: ["GET","POST"]
     }
 })
